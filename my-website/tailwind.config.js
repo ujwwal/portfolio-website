@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        page: '#05070d',
-        electric: '#4f7cff',
+        page: '#020202',
+        electric: '#d4d4d8',
       },
     },
   },

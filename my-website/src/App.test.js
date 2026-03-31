@@ -4,7 +4,7 @@ import App from './App';
 test('renders hero content and actions', () => {
   render(<App />);
 
-  expect(screen.getByText(/Ujjwal Gupta/i)).toBeInTheDocument();
-  expect(screen.getByRole('link', { name: /Projects/i })).toBeInTheDocument();
-  expect(screen.getByRole('link', { name: /Contact/i })).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: /AI Engineer/i })).toBeInTheDocument();
+  expect(screen.getAllByRole('link', { name: /Projects/i }).length).toBeGreaterThan(0);
+  expect(screen.getAllByRole('link', { name: /Contact/i }).length).toBeGreaterThan(0);
 });
