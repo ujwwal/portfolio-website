@@ -69,10 +69,10 @@ When modifying files:
 2. **Templates** - Edit in `src/ui-ux-pro-max/templates/`:
    - `base/skill-content.md` - Common SKILL.md content
    - `base/quick-reference.md` - Quick reference section (Claude only)
-   - `platforms/*.json` - Platform-specific configs
+      - `platforms/*.json` - Platform-specific configs
 
-3. **CLI Assets** - Run sync before publishing:
-   ```bash
+   3. **CLI Assets** - Run sync before publishing:
+      ```bash
    cp -r src/ui-ux-pro-max/data/* cli/assets/data/
    cp -r src/ui-ux-pro-max/scripts/* cli/assets/scripts/
    cp -r src/ui-ux-pro-max/templates/* cli/assets/templates/
