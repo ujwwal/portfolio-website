@@ -181,7 +181,32 @@ function App() {
           </a>
         </div>
       </section>
-    </main>
+
+      <section id="about" className="px-6 py-14 md:py-20">
+        <div className="mx-auto max-w-6xl rounded-2xl border border-white/10 bg-[#0f1320] p-8 md:p-10">
+          <p className="text-xs uppercase tracking-[0.24em] text-violet-200/90">About</p>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-300">
+            I focus on the intersection of machine learning, product thinking, and engineering execution. I enjoy taking
+            ambiguous ideas and shaping them into resilient systems that people actually use.
+          </p>
+        </div>
+      </section>
+
+      <footer id="contact" className="px-6 pb-20 pt-6">
+        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 rounded-2xl border border-white/10 bg-gradient-to-r from-cyan-500/15 to-violet-500/15 p-8 md:flex-row md:items-center">
+          <div>
+            <p className="text-xs uppercase tracking-[0.24em] text-cyan-100/90">Contact</p>
+            <p className="mt-3 text-2xl font-bold">Let&apos;s build something sharp.</p>
+          </div>
+          <a
+            href="mailto:hello@ujjwal.dev"
+            className="rounded-md bg-slate-100 px-5 py-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-900"
+          >
+            hello@ujjwal.dev
+          </a>
+        </div>
+      </footer>
+    </div>
   );
 }
 
