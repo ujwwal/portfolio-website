@@ -1,211 +1,232 @@
-import { motion } from 'framer-motion';
-
-const stats = [
-  { label: 'Projects Shipped', value: '18+' },
-  { label: 'Years Building', value: '4' },
-  { label: 'Avg. Model Lift', value: '23%' },
-];
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowUpRight, Globe, MessageCircle, Mail, Sparkles, Code2, Database, Rocket } from 'lucide-react';
+import { useRef } from 'react';
 
 const featuredProjects = [
   {
     name: 'SignalLens',
-    summary:
-      'An analytics + ML workspace that turns messy product events into clear recommendations for teams.',
+    summary: 'Analytics & ML workspace turning unorganized product events into data-driven narratives and recommendations.',
     stack: ['React', 'Python', 'PostgreSQL'],
+    colSpan: 'md:col-span-2',
+    rowSpan: 'md:row-span-2',
+    icon: <Sparkles className="w-5 h-5 text-accent-violet" />
   },
   {
     name: 'NimbusOps',
-    summary:
-      'A reliability dashboard that predicts outages and helps engineering teams resolve incidents earlier.',
-    stack: ['TypeScript', 'FastAPI', 'Docker'],
+    summary: 'Predictive reliability dashboard to resolve incidents before they escalate.',
+    stack: ['TypeScript', 'FastAPI'],
+    colSpan: 'md:col-span-1',
+    rowSpan: 'md:row-span-1',
+    icon: <Database className="w-5 h-5 text-accent-blue" />
   },
   {
     name: 'PersonaFlow',
-    summary:
-      'Customer intelligence toolkit that combines segmentation, semantic search, and narrative reporting.',
-    stack: ['Next.js', 'LangChain', 'Redis'],
+    summary: 'Customer intelligence toolkit combining segmentation with semantic search.',
+    stack: ['Next.js', 'LangChain'],
+    colSpan: 'md:col-span-1',
+    rowSpan: 'md:row-span-1',
+    icon: <Code2 className="w-5 h-5 text-accent-cyan" />
   },
 ];
 
 const skills = [
-  'AI Product Design',
-  'ML Prototyping',
-  'Data Engineering',
-  'React Frontends',
-  'Experimentation',
-  'API Architecture',
-  'Cloud Deployment',
-  'Storytelling with Data',
+  'AI Product Design', 'ML Prototyping', 'Data Engineering', 'React Frontends',
+  'Experimentation', 'API Architecture', 'Cloud Deployment', 'Storytelling with Data',
+  'AI Product Design', 'ML Prototyping', 'Data Engineering', 'React Frontends', // Duplicate for infinite scroll
 ];
 
 function App() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+  
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+
   return (
-    <main className="min-h-screen bg-page text-slate-100">
-      <nav className="sticky top-0 z-50 border-b border-slate-200/10 bg-[#08080ebf] px-6 py-4 backdrop-blur-xl md:px-10">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between">
-          <span className="font-mono text-sm font-bold tracking-[0.12em] text-violet-300">UJ/</span>
-          <div className="hidden items-center gap-8 md:flex">
-            {['Work', 'Skills', 'Contact'].map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className="text-xs uppercase tracking-[0.16em] text-slate-300/75 transition hover:text-violet-300"
-              >
+    <div className="relative min-h-screen text-textMain font-sans selection:bg-accent-violet/30" ref={containerRef}>
+      {/* Background Elements */}
+      <div className="mesh-bg" />
+      <motion.div 
+        className="absolute inset-0 z-[-1] opacity-30 bg-repeat bg-[length:32px_32px]"
+        style={{ 
+          backgroundImage: 'radial-gradient(#ffffff11 1px, transparent 1px)',
+          y: backgroundY 
+        }}
+      />
+
+      {/* Floating Header */}
+      <motion.nav 
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-2xl"
+      >
+        <div className="glass-panel rounded-full px-6 py-4 flex items-center justify-between">
+          <span className="font-display font-bold text-xl tracking-tight">UJ<span className="text-accent-violet">/</span></span>
+          <div className="hidden md:flex gap-8 items-center">
+            {['Work', 'Skills', 'About'].map((item) => (
+              <a key={item} href={`#${item.toLowerCase()}`} className="text-sm font-medium text-textMuted hover:text-white transition-colors">
                 {item}
               </a>
             ))}
           </div>
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
-            <span className="text-[10px] uppercase tracking-[0.18em] text-slate-300/65">Open to work</span>
-          </div>
+          <a href="#contact" className="bg-white/10 hover:bg-white/20 text-white text-sm font-medium px-4 py-2 rounded-full transition-colors flex items-center gap-2">
+            Let's Talk <ArrowUpRight className="w-4 h-4" />
+          </a>
         </div>
-      </nav>
+      </motion.nav>
 
-      <section className="relative overflow-hidden px-6 pb-16 pt-20 md:px-10 md:pt-28">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(167,139,250,0.22),transparent_35%),radial-gradient(circle_at_84%_14%,rgba(56,189,248,0.22),transparent_34%)]" />
-        <div className="absolute inset-0 opacity-10 [background-image:linear-gradient(rgba(255,255,255,.24)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.24)_1px,transparent_1px)] [background-size:46px_46px]" />
-
-        <div className="relative z-10 mx-auto grid w-full max-w-6xl gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+      <main className="px-6 md:px-12 max-w-7xl mx-auto pt-40 pb-24">
+        
+        {/* Hero Section */}
+        <section className="min-h-[70vh] flex flex-col justify-center items-start">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
+            initial={{ opacity: 0, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, filter: 'blur(0px)' }}
+            transition={{ duration: 1 }}
+            className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8"
           >
-            <p className="text-xs uppercase tracking-[0.28em] text-cyan-200/90">Portfolio 2026</p>
-            <h1 className="font-display mt-5 text-4xl font-extrabold leading-tight sm:text-5xl md:text-6xl">
-              Reimagined portfolio.
-              <span className="block bg-gradient-to-r from-violet-300 via-cyan-300 to-indigo-300 bg-clip-text text-transparent">
-                Cleaner story, stronger impact.
-              </span>
-            </h1>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
-              I build production-ready AI products that balance technical depth with user experience. This redesign focuses
-              on clarity, stronger hierarchy, and a modern visual identity.
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href="#work"
-                className="rounded-full bg-gradient-to-r from-cyan-300 to-violet-300 px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-slate-900 shadow-lg shadow-cyan-500/20"
-              >
-                Explore Work
-              </a>
-              <a
-                href="#contact"
-                className="rounded-full border border-slate-300/20 px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-slate-100 transition hover:border-violet-300/50 hover:text-violet-200"
-              >
-                Let&apos;s Talk
-              </a>
-            </div>
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-cyan opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-cyan"></span>
+            </span>
+            <span className="text-xs uppercase tracking-widest font-semibold text-accent-cyan">Open for New Roles</span>
           </motion.div>
 
-          <motion.aside
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
-            className="rounded-3xl border border-slate-300/15 bg-slate-900/50 p-6 shadow-[0_24px_48px_rgba(2,12,27,0.45)] backdrop-blur"
+          <div className="max-w-4xl">
+            <motion.h1 
+              className="font-display font-extrabold text-5xl md:text-7xl lg:text-8xl leading-[1.1] tracking-tight"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              Crafting <span className="text-gradient">intellgent</span> <br/>
+              digital experiences.
+            </motion.h1>
+            
+            <motion.p 
+              className="mt-8 text-lg md:text-xl text-textMuted max-w-2xl leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              Production-ready AI product engineering blending technical precision with compelling user design. Elevating how users interact with data.
+            </motion.p>
+          </div>
+
+          <motion.div 
+            className="mt-12 flex gap-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.6 }}
           >
-            <p className="text-xs uppercase tracking-[0.22em] text-violet-200/90">Snapshot</p>
-            <div className="mt-5 space-y-4">
-              {stats.map((item) => (
-                <div key={item.label} className="rounded-2xl border border-slate-300/10 bg-slate-900/45 p-4">
-                  <p className="text-2xl font-bold text-slate-100">{item.value}</p>
-                  <p className="mt-1 text-xs uppercase tracking-[0.16em] text-slate-400">{item.label}</p>
-                </div>
-              ))}
+             <a href="#work" className="bg-white text-black px-8 py-4 rounded-full font-semibold text-sm hover:scale-105 transition-transform flex items-center gap-2">
+               Explore Work
+             </a>
+          </motion.div>
+        </section>
+
+        {/* Bento Box Work Section */}
+        <section id="work" className="pt-24 mt-24 border-t border-white/5">
+          <div className="flex items-end justify-between mb-12">
+            <div>
+              <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight">Selected Work</h2>
+              <p className="text-textMuted mt-3">Things I've built lately.</p>
             </div>
-          </motion.aside>
-        </div>
-      </section>
+            <Rocket className="w-10 h-10 text-accent-violet hidden sm:block opacity-50" />
+          </div>
 
-      <section id="work" className="px-6 py-16 md:px-10 md:py-24">
-        <div className="mx-auto max-w-6xl">
-          <p className="text-xs uppercase tracking-[0.26em] text-cyan-200/80">Work</p>
-          <h2 className="font-display mt-3 text-3xl font-bold sm:text-4xl">Featured Projects</h2>
-
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {featuredProjects.map((project, index) => (
-              <motion.article
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:auto-rows-[280px]">
+            {featuredProjects.map((project, idx) => (
+              <motion.div
                 key={project.name}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group rounded-2xl border border-slate-300/10 bg-slate-900/45 p-5 transition hover:-translate-y-1 hover:border-violet-300/35"
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.15, duration: 0.6 }}
+                className={`glass-card rounded-3xl p-8 flex flex-col justify-between group cursor-default relative overflow-hidden ${project.colSpan} ${project.rowSpan}`}
               >
-                <h3 className="font-display text-xl font-semibold text-slate-100">{project.name}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-300">{project.summary}</p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {project.stack.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full border border-slate-300/15 bg-slate-800/50 px-3 py-1 text-[10px] uppercase tracking-[0.14em] text-cyan-100/90"
-                    >
-                      {item}
+                {/* Decorative glow */}
+                <div className="absolute -top-24 -right-24 w-48 h-48 bg-accent-violet/20 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="bg-surface/50 p-3 rounded-xl border border-white/5">
+                      {project.icon}
+                    </div>
+                    <ArrowUpRight className="w-5 h-5 text-white/30 group-hover:text-white transition-colors" />
+                  </div>
+                  <h3 className="font-display text-2xl font-bold mb-3">{project.name}</h3>
+                  <p className="text-textMuted leading-relaxed max-w-sm">{project.summary}</p>
+                </div>
+
+                <div className="flex flex-wrap gap-2 mt-8">
+                  {project.stack.map(tech => (
+                    <span key={tech} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-white/80 uppercase tracking-wider">
+                      {tech}
                     </span>
                   ))}
                 </div>
-              </motion.article>
+              </motion.div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="skills" className="px-6 pb-16 md:px-10 md:pb-24">
-        <div className="mx-auto max-w-6xl rounded-3xl border border-slate-300/10 bg-slate-900/45 p-7 md:p-10">
-          <p className="text-xs uppercase tracking-[0.26em] text-violet-200/80">Skills</p>
-          <h2 className="font-display mt-3 text-3xl font-bold sm:text-4xl">What I Bring</h2>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {skills.map((skill) => (
-              <div key={skill} className="rounded-xl border border-slate-300/12 bg-slate-950/40 px-4 py-3 text-sm text-slate-200">
-                {skill}
+        {/* Marquee Skills Section */}
+        <section id="skills" className="pt-32 pb-16 overflow-hidden">
+          <div className="flex space-x-8 animate-marquee whitespace-nowrap opacity-60">
+            {skills.map((skill, i) => (
+              <span key={`${skill}-${i}`} className="font-display text-4xl md:text-7xl font-bold stroke-text text-transparent" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.2)'}}>
+                {skill} <span className="text-accent-blue/30 mx-4">•</span>
+              </span>
+            ))}
+          </div>
+        </section>
+
+        {/* Contact & About Section */}
+        <section id="about" className="pt-24 md:pt-32">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="glass-panel relative rounded-3xl p-10 md:p-16 overflow-hidden text-center max-w-4xl mx-auto"
+          >
+            {/* Inner Glow */}
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-cyan to-transparent opacity-50" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-accent-blue/20 blur-[100px] pointer-events-none" />
+
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">Let's build together.</h2>
+            <p className="text-textMuted text-lg max-w-2xl mx-auto leading-relaxed mb-10">
+              I am always looking for exciting opportunities to build resilient, design-driven systems. If you have a project that needs a sharp technical edge combined with stunning UI, my inbox is open.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a href="mailto:hello@ujjwal.dev" className="w-full sm:w-auto bg-white text-black px-8 py-4 rounded-full font-bold transition hover:bg-slate-200 flex items-center justify-center gap-2">
+                <Mail className="w-5 h-5" /> Say Hello
+              </a>
+              <div className="flex gap-4 w-full sm:w-auto justify-center">
+                <a href="#" className="p-4 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:text-accent-cyan transition-colors">
+                  <Globe className="w-5 h-5" />
+                </a>
+                <a href="#" className="p-4 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:text-accent-blue transition-colors">
+                  <MessageCircle className="w-5 h-5" />
+                </a>
               </div>
-            ))}
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Footer */}
+        <footer className="mt-32 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-textMuted">
+          <p>© 2026 Ujjwal. Portfolio Redesign.</p>
+          <div className="flex items-center gap-6">
+            <span className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /> All Systems Nominal</span>
           </div>
-        </div>
-      </section>
+        </footer>
 
-      <section id="contact" className="px-6 pb-20 md:px-10 md:pb-28">
-        <div className="mx-auto max-w-6xl rounded-3xl border border-cyan-200/15 bg-gradient-to-r from-cyan-500/10 to-violet-500/10 p-8 text-center md:p-12">
-          <p className="text-xs uppercase tracking-[0.24em] text-cyan-100/80">Contact</p>
-          <h2 className="font-display mt-4 text-3xl font-bold sm:text-4xl">Want this same level of polish for your product?</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base">
-            I&apos;m available for AI engineering, product builds, and design-driven frontend work.
-          </p>
-          <a
-            href="mailto:hello@ujjwal.dev"
-            className="mt-8 inline-flex rounded-full bg-slate-100 px-7 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-900"
-          >
-            hello@ujjwal.dev
-          </a>
-        </div>
-      </section>
-
-      <section id="about" className="px-6 py-14 md:py-20">
-        <div className="mx-auto max-w-6xl rounded-2xl border border-white/10 bg-[#0f1320] p-8 md:p-10">
-          <p className="text-xs uppercase tracking-[0.24em] text-violet-200/90">About</p>
-          <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-300">
-            I focus on the intersection of machine learning, product thinking, and engineering execution. I enjoy taking
-            ambiguous ideas and shaping them into resilient systems that people actually use.
-          </p>
-        </div>
-      </section>
-
-      <footer id="contact" className="px-6 pb-20 pt-6">
-        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 rounded-2xl border border-white/10 bg-gradient-to-r from-cyan-500/15 to-violet-500/15 p-8 md:flex-row md:items-center">
-          <div>
-            <p className="text-xs uppercase tracking-[0.24em] text-cyan-100/90">Contact</p>
-            <p className="mt-3 text-2xl font-bold">Let&apos;s build something sharp.</p>
-          </div>
-          <a
-            href="mailto:hello@ujjwal.dev"
-            className="rounded-md bg-slate-100 px-5 py-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-900"
-          >
-            hello@ujjwal.dev
-          </a>
-        </div>
-      </footer>
+      </main>
     </div>
   );
 }
