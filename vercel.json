@@ -1,7 +1,8 @@
 {
   "version": 2,
   "framework": "create-react-app",
-  "installCommand": "npm install",
+  "installCommand": "npm ci",
+  "devCommand": "npm start",
   "buildCommand": "npm run build",
   "outputDirectory": "build",
   "rewrites": [

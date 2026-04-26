@@ -4,20 +4,21 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        display: ['Outfit', 'sans-serif'],
+        sans: ['Plus Jakarta Sans', 'sans-serif'],
+        display: ['Fraunces', 'serif'],
+        mono: ['IBM Plex Mono', 'monospace'],
       },
       colors: {
-        background: '#000000',
-        surface: '#0a0a0a',
-        surfaceLighter: '#111111',
+        background: '#f6f1e7',
+        surface: '#fffaf1',
+        surfaceLighter: '#fffdf8',
         accent: {
-          light: '#f5f5f5',
-          muted: '#888888',
-          dark: '#333333',
+          light: '#f7efe2',
+          muted: '#ad8a64',
+          dark: '#573d22',
         },
-        textMain: '#ffffff',
-        textMuted: '#a1a1aa',
+        textMain: '#1f1914',
+        textMuted: '#7c6b59',
       },
       animation: {
         'marquee': 'marquee 40s linear infinite',
