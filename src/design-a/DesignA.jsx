@@ -13,8 +13,8 @@ const profile = {
   name: "Ujjwal",
   shortBio: "a software engineer focused on backend systems, data products, and applied AI",
   availability: "Open to backend, data, and AI engineering roles",
-  location: "Sydney, Australia",
-  email: "hello@ujjwal.dev",
+  location: "Delhi, India",
+  email: "",
   stats: [
     { value: "05", label: "Core Projects" },
     { value: "03", label: "Domains" },
@@ -23,7 +23,6 @@ const profile = {
   ],
   socials: [
     { label: "GitHub", handle: "@ujwwal", href: "https://github.com/ujwwal" },
-    { label: "Email", handle: "hello@ujjwal.dev", href: "mailto:hello@ujjwal.dev" },
     { label: "Portfolio", handle: "systems-first builder", href: "#top" },
   ],
 };
@@ -135,9 +134,21 @@ const projectTypes = ["All", ...new Set(projects.map((project) => project.type))
 
 const experience = [
   {
+    id: "exp-linkedout",
+    period: "Sep 2025 - Dec 2025",
+    location: "Remote",
+    role: "AI/ML Engineer",
+    org: "LinkedOut",
+    bullets: [
+      "Built a scalable LinkedIn post generator integrating OpenAI API, enabling persona-driven content creation for professionals.",
+      "Led the AI development lifecycle, from prompt engineering and fine-tuning to evaluation. Ensured consistent tone, clarity, and industry-specific relevance.",
+      "Implemented feedback-guided refinement loops and style adaptation models to improve personalization and enhance output quality over iterations.",
+    ],
+  },
+  {
     id: "exp-1",
     period: "2025 - Present",
-    location: "Sydney, AU",
+    location: "Delhi, IN",
     role: "Software Engineer",
     org: "Independent Projects",
     bullets: [
@@ -233,7 +244,7 @@ const NAV = [
   { id: "contact", label: "Contact" },
 ];
 
-const Header = ({ clock }) => {
+const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   useEffect(() => {
@@ -280,10 +291,6 @@ const Header = ({ clock }) => {
           ))}
         </nav>
         <div className="hidden lg:flex items-center gap-4">
-          <span className="font-mono text-[11px] text-neutral-500">
-            <span className="inline-block w-1.5 h-1.5 bg-emerald-600 rounded-full mr-1.5 align-middle" />
-            {clock}
-          </span>
           <button
             onClick={() => scrollTo("contact")}
             className="px-4 py-2 text-[12px] font-medium bg-neutral-900 text-[#fafaf9] hover:bg-neutral-700 transition-colors"
@@ -315,7 +322,7 @@ const Header = ({ clock }) => {
 };
 
 /* ---------------- Hero ---------------- */
-const Hero = ({ clock }) => {
+const Hero = () => {
   const scrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -337,7 +344,7 @@ const Hero = ({ clock }) => {
             {profile.availability}
           </div>
           <div className="hidden md:block">
-            {profile.location} · {clock}
+            {profile.location}
           </div>
         </div>
 
@@ -696,9 +703,11 @@ const Contact = () => {
             <span className="inline-block w-3 h-14 lg:h-24 bg-neutral-50 align-baseline ml-2 animate-blink" />
           </h2>
           <div className="mt-10 space-y-3 font-mono text-[13px]">
-            <a href={`mailto:${profile.email}`} className="block text-neutral-50 link-underline">
-              {profile.email}
-            </a>
+            {profile.email && (
+              <a href={`mailto:${profile.email}`} className="block text-neutral-50 link-underline">
+                {profile.email}
+              </a>
+            )}
             <div className="text-neutral-400">{profile.location}</div>
             <div className="flex flex-wrap gap-4 pt-4">
               {profile.socials.map((s) => (
@@ -779,23 +788,12 @@ const Footer = () => (
 
 /* ---------------- Page ---------------- */
 const DesignA = () => {
-  const [clock, setClock] = useState("");
-  useEffect(() => {
-    const tick = () => {
-      const opts = { timeZone: "Australia/Sydney", hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" };
-      setClock(new Intl.DateTimeFormat("en-GB", opts).format(new Date()) + " AEST");
-    };
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
-
   return (
     <div className="relative min-h-screen bg-[#fafaf9] text-neutral-900 font-plex">
       <DesignSwitcher theme="light" />
-      <Header clock={clock} />
+      <Header />
       <main>
-        <Hero clock={clock} />
+        <Hero />
         <About />
         <Skills />
         <Projects />
