@@ -134,6 +134,14 @@ const projectTypes = ["All", ...new Set(projects.map((project) => project.type))
 
 const experience = [
   {
+    id: "exp-ey",
+    period: "July 2026 - Present",
+    location: "India",
+    role: "Oracle Analyst",
+    org: "EY India",
+    bullets: [],
+  },
+  {
     id: "exp-linkedout",
     period: "Sep 2025 - Dec 2025",
     location: "Remote",
@@ -143,54 +151,6 @@ const experience = [
       "Built a scalable LinkedIn post generator integrating OpenAI API, enabling persona-driven content creation for professionals.",
       "Led the AI development lifecycle, from prompt engineering and fine-tuning to evaluation. Ensured consistent tone, clarity, and industry-specific relevance.",
       "Implemented feedback-guided refinement loops and style adaptation models to improve personalization and enhance output quality over iterations.",
-    ],
-  },
-  {
-    id: "exp-1",
-    period: "2025 - Present",
-    location: "Delhi, IN",
-    role: "Software Engineer",
-    org: "Independent Projects",
-    bullets: [
-      "Shipped backend-heavy products spanning cybersecurity training, civic infrastructure intelligence, and telemetry analytics.",
-      "Designed idempotent ingestion paths and fallback-first runtime behavior to keep systems stable under real-world API variance.",
-      "Led end-to-end build loops from schema design and API contracts through deployment and monitoring decisions.",
-    ],
-  },
-  {
-    id: "exp-2",
-    period: "2024 - 2025",
-    location: "University + Remote",
-    role: "Applied AI Builder",
-    org: "Product and Research Work",
-    bullets: [
-      "Built AI-assisted workflows focused on decision quality and measurable user behavior change, not novelty metrics.",
-      "Integrated LLM APIs with resilient fallback strategies, prompt control, and scoring pipelines for stable outcomes.",
-      "Translated model outputs into product-facing dashboards and operational tooling for non-technical stakeholders.",
-    ],
-  },
-  {
-    id: "exp-3",
-    period: "2023 - 2024",
-    location: "Remote",
-    role: "Full-Stack Developer",
-    org: "Education and Platform Systems",
-    bullets: [
-      "Delivered attendance and workflow platforms with strict integrity constraints and practical admin controls.",
-      "Implemented account recovery and secure session flows while preserving usability for non-technical users.",
-      "Built analytics surfaces for trend visibility and shortage detection to support daily operational decisions.",
-    ],
-  },
-  {
-    id: "exp-4",
-    period: "2022 - 2023",
-    location: "Self-directed",
-    role: "Systems Foundation",
-    org: "Core Engineering Training",
-    bullets: [
-      "Strengthened core fundamentals across Python, SQL, backend architecture, and Git-based delivery workflows.",
-      "Practiced repeatable software design through iterative builds and post-mortem style debugging.",
-      "Focused on writing software that can be maintained and extended without redesigning from scratch.",
     ],
   },
 ];
@@ -273,7 +233,7 @@ const Header = () => {
         >
           <span className="inline-block w-2 h-2 bg-neutral-900 rounded-full" />
           <span className="font-mono text-[13px]">
-            ujjwal.dev<span className="text-neutral-400">/systems-engineer</span>
+            ujjwal.dev<span className="text-neutral-400">/ai-engineer</span>
           </span>
         </button>
         <nav className="hidden lg:flex items-center gap-1">
@@ -776,7 +736,7 @@ const Footer = () => (
     <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
       <div className="flex items-center gap-3">
         <span className="inline-block w-2 h-2 bg-neutral-50 rounded-full" />
-        <span className="font-mono text-[11px]">ujjwal.dev<span className="text-neutral-600">/systems-engineer</span></span>
+        <span className="font-mono text-[11px]">ujjwal.dev<span className="text-neutral-600">/ai-engineer</span></span>
       </div>
       <div className="font-mono text-[11px] text-neutral-500 flex flex-wrap gap-x-6 gap-y-2">
         <span>&copy; {new Date().getFullYear()} {profile.name}</span>
