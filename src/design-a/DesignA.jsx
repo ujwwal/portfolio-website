@@ -7,7 +7,6 @@ import {
   Send,
   Terminal,
 } from "lucide-react";
-import DesignSwitcher from "./DesignSwitcher";
 
 const profile = {
   name: "Ujjwal",
@@ -54,21 +53,6 @@ const skillGroups = [
 
 const projects = [
   {
-    id: "f1-2026-suite",
-    year: "2026",
-    type: "Data Engineering",
-    title: "F1 2026 Race Strategy Suite",
-    summary:
-      "Telemetry-driven race strategy system modeling lap time, tyre wear, hybrid deployment, and active aero trade-offs for the 2026 Formula 1 regulations.",
-    href: "#",
-    stack: ["Python", "Pandas", "FastF1", "SQL", "Scikit-learn (planned)", "Jupyter Notebook"],
-    metrics: [
-      { k: "focus", v: "2026" },
-      { k: "mode", v: "ML+RL" },
-      { k: "type", v: "Telemetry" },
-    ],
-  },
-  {
     id: "cybervantage",
     year: "2025",
     type: "AI Systems",
@@ -81,6 +65,21 @@ const projects = [
       { k: "uptime", v: "99.9%" },
       { k: "engine", v: "Gemini" },
       { k: "award", v: "Tech^Us" },
+    ],
+  },
+  {
+    id: "f1-2026-suite",
+    year: "2026",
+    type: "Data Engineering",
+    title: "F1 2026 Race Strategy Suite",
+    summary:
+      "Telemetry-driven race strategy system modeling lap time, tyre wear, hybrid deployment, and active aero trade-offs for the 2026 Formula 1 regulations.",
+    href: "#",
+    stack: ["Python", "Pandas", "FastF1", "SQL", "Scikit-learn (planned)", "Jupyter Notebook"],
+    metrics: [
+      { k: "focus", v: "2026" },
+      { k: "mode", v: "ML+RL" },
+      { k: "type", v: "Telemetry" },
     ],
   },
   {
@@ -750,7 +749,6 @@ const Footer = () => (
 const DesignA = () => {
   return (
     <div className="relative min-h-screen bg-[#fafaf9] text-neutral-900 font-plex">
-      <DesignSwitcher theme="light" />
       <Header />
       <main>
         <Hero />
